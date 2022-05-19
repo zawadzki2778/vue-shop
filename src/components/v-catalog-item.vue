@@ -6,8 +6,13 @@
       alt="img"
     />
     <p class="v-catalog-item__name">{{ product_data.name }}</p>
-    <p class="v-catalog-item__price">{{ product_data.price }}</p>
-    <button class="v-catalog-item__add_to_cart_btn btn">add to cart</button>
+    <p class="v-catalog-item__price">Price {{ product_data.price }} P</p>
+    <button
+      class="v-catalog-item__add_to_cart_btn btn"
+      @click="sendDataToParent" 
+    >
+      add to cart
+    </button>
   </div>
 </template>
 
@@ -26,6 +31,11 @@ export default {
     return {};
   },
   computed: {},
+  methods: {
+    sendDataToParent() {
+      this.$emit('sendDataToParent', this.product_data.article)
+    }
+  }
 };
 </script>
 
@@ -37,7 +47,7 @@ export default {
   padding: $padding * 2;
   margin-bottom: $margin * 2;
   &__image {
-    width: 100px;
+    width: 50px;
   }
 }
 </style>

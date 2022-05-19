@@ -5,7 +5,9 @@
       <v-catalog-item 
       v-for="product in products"
       :key="product.article"
-      v-bind:product_data="product"/>
+      v-bind:product_data="product"
+      @sendDataToParent="showChildArticleInConsole"
+      />
     </div>
   </div>
 </template>
@@ -73,6 +75,12 @@ export default {
       ],
     };
   },
+  computed: {},
+  methods: {
+    showChildArticleInConsole(data) {
+      console.log(data);
+    }    
+  }
 };
 </script>
 
