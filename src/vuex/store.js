@@ -5,24 +5,24 @@ import axios from 'axios'
 Vue.use(Vuex);
 
 let store = new Vuex.Store({
-  state: {
+  state: {  // для хранения данных
     products: []
   },
-  mutations: {
+  mutations: { // для изменения данных в state, m-синхронны
     SET_PRODUCT_TO_STATE: (state, products) => {
       state.products = products;
     }
   },
-  actions: {
+  actions: { // а-асинхронны
     GET_PRODUCTS_FROM_API({
       commit
     }) {
-      return axios('http://localhost:3000/products', {
-          method: "GET"
-        })
+      return axios('http://localhost:3000/products', { // это промис
+        method: "GET"
+      })
         .then((products) => {
 
-          commit('SET_PRODUCT_TO_STATE', products);
+          commit('SET_PRODUCT_TO_STATE', products.data);
           return products;
         })
         .catch((error) => {
@@ -30,7 +30,7 @@ let store = new Vuex.Store({
           return error;
         })
     },
-    getters: {
+    getters: { // это короткий путь для получения данных из state
       PRODUCTS(state) {
         return state.products;
       }
